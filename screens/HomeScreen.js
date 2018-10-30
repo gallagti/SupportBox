@@ -8,13 +8,15 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { WebBrowser } from 'expo';
+// Import statements go here, this includes pictures or tile pics from a file
 
+import { WebBrowser } from 'expo';
 import { MonoText } from '../components/StyledText';
+
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    header: null,
+    headerTransparent: true
   };
 
   render() {
@@ -42,7 +44,7 @@ export default class HomeScreen extends React.Component {
             </View>
 
             <Text style={styles.getStartedText}>
-              Change this text and your app will automatically reload.
+
             </Text>
           </View>
 
@@ -52,7 +54,7 @@ export default class HomeScreen extends React.Component {
             </TouchableOpacity>
           </View>
         </ScrollView>
-
+        // new styile, which is the info bar at the bottom I believe
         <View style={styles.tabBarInfoContainer}>
           <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
 

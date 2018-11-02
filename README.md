@@ -5,7 +5,16 @@
 
 
 
-# SupportBox
+# SupportBox  
+  
+Contributors:  
+Timothy Gallagher  
+Brandon Williams  
+Tobi Otepola-Bello  
+Alexandria Labossiere  
+
+
+
 
 Installation Directions:  
 clone repository and cd into the directory  

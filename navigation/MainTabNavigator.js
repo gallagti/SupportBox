@@ -16,7 +16,7 @@ import SettingsScreen from '../screens/SettingsScreen';
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
 });
-
+//is a test
 HomeStack.navigationOptions = {
   tabBarLabel: 'Home',
   tabBarIcon: ({
@@ -94,7 +94,7 @@ SettingsStack.navigationOptions = {
 };
 
 export default createBottomTabNavigator({
-  HomeStack,
+  //HomeStack,
   GroupStack,
   LinksStack,
   SettingsStack,

@@ -13,7 +13,7 @@ import {
 // Import statements go here, this includes pictures or tile pics from a file
 
 import { WebBrowser } from 'expo';
-import { MonoText } from '../components/StyledText';
+//import { MonoText } from '../components/StyledText';
 import settingIcon from '../assets/images/settingIcon.png';
 import boxIcon from '../assets/images/SupportBoxMainLogoTranUpdated.png';
 import groupPic from '../assets/images/hands.png'
@@ -62,9 +62,8 @@ export default class MyGroupsScreen extends React.Component {
                </View>
 
            </ScrollView>
-
-       )
-   };
+       );
+   }
  }
 
 class goToMyGroups extends React.Component{

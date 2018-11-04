@@ -24,5 +24,7 @@ download Expo Client on iPhone/Android
 'expo start' while loaded in file 'SupportBox' on cmd   
 scan QR code on phone and open in Expo client app  
 
+
 We are currently using:  
 https://github.com/GeekyAnts/NativeBase  
+npm install --save react-native-firebase

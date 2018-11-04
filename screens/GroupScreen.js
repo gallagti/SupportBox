@@ -1,6 +1,6 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import * as firebase from 'firebase';
+//import * as firebase from 'firebase';
 import { Container, Header, Content, Button, Text } from 'native-base';
 import {
   Image,
@@ -27,7 +27,7 @@ export default class MyGroupsScreen extends React.Component {
     headerTransparent: true
   };
 
-  render() {\
+  render() {
        return (
           <ScrollView style={styles.container}>
                    <View style={styles.BoxIcon}>

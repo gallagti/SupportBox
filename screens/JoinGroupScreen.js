@@ -22,7 +22,7 @@ import groupPic from '../assets/images/hands.png'
 
 
 
-export default class MyGroupsScreen extends React.Component {
+export default class JoinGroupScreen extends React.Component {
   static navigationOptions = {
     header: (
       <Header>
@@ -32,7 +32,7 @@ export default class MyGroupsScreen extends React.Component {
           </Button>
         </Left>
         <Body>
-          <Title>Groups</Title>
+          <Title>Join Groups</Title>
         </Body>
         <Right />
       </Header>
@@ -45,7 +45,7 @@ export default class MyGroupsScreen extends React.Component {
        return (
          <View style={styles.BoxIcon}>
          <Text>
-         Here are your Groups
+         Join a group
          </Text>
          </View>
 

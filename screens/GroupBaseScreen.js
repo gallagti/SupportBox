@@ -19,7 +19,9 @@ import boxIcon from '../assets/images/SupportBoxMainLogoTranUpdated.png';
 import groupPic from '../assets/images/hands.png'
 import {StackNavigator} from "react-navigation";
 import MyGroupsScreen from "./MyGroupsScreen.js";
-//import MyGroups from './MyGroupsScreen.js';
+import JoinGroupScreen from "./JoinGroupScreen.js";
+import SearchGroupScreen from "./SearchGroupScreen.js";
+//import SearchGroupScreen from "./SearchGroupScreen.js";
 
 export default class GroupBaseScreen extends React.Component {
   static navigationOptions = {
@@ -52,10 +54,18 @@ export default class GroupBaseScreen extends React.Component {
                         >
                           <Text>My Groups</Text>
                         </Button>
-                        <Button block style = {styles.JoinAGroupButton}>
+
+                        <Button
+                        block style = {styles.JoinAGroupButton}
+                        onPress={() => this.props.navigation.navigate('JoinGroupScreen')}
+                        >
                           <Text>Join a Group</Text>
                         </Button>
-                        <Button block style = {styles.SearchAGroupButton}>
+
+                        <Button
+                        block style = {styles.SearchAGroupButton}
+                        onPress={() => this.props.navigation.navigate('SearchGroupScreen')}
+                        >
                           <Text>Search for a Group</Text>
                         </Button>
                       </Content>

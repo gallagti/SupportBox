@@ -9,7 +9,8 @@ import {
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import GroupScreen from '../screens/GroupScreen';
+import GroupBaseScreen from '../screens/GroupBaseScreen';
+import MyGroupsScreen from '../screens/MyGroupsScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 
@@ -35,7 +36,8 @@ HomeStack.navigationOptions = {
 };
 
 const GroupStack = createStackNavigator({
-  Groups: GroupScreen,
+  Groups: GroupBaseScreen,
+  MyGroupsScreen: MyGroupsScreen,
 });
 
 GroupStack.navigationOptions = {
@@ -94,7 +96,7 @@ SettingsStack.navigationOptions = {
 };
 
 export default createBottomTabNavigator({
-  //HomeStack,
+  HomeStack,
   GroupStack,
   LinksStack,
   SettingsStack,

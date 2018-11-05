@@ -9,14 +9,20 @@ import {
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import GroupScreen from '../screens/GroupScreen';
+import GroupBaseScreen from '../screens/GroupBaseScreen';
+import MyGroupsScreen from '../screens/MyGroupsScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+//import LoginScreen from '../screens/LoginScreen';
+import JoinGroupScreen from '../screens/JoinGroupScreen';
+import SearchGroupScreen from '../screens/SearchGroupScreen';
+//import SearchGroupScreen from '../screens/SearchGroupScreen';
+
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
 });
-
+//is a test
 HomeStack.navigationOptions = {
   tabBarLabel: 'Home',
   tabBarIcon: ({
@@ -35,7 +41,10 @@ HomeStack.navigationOptions = {
 };
 
 const GroupStack = createStackNavigator({
-  Groups: GroupScreen,
+  Groups: GroupBaseScreen,
+  MyGroupsScreen: MyGroupsScreen,
+  JoinGroupScreen: JoinGroupScreen,
+  SearchGroupScreen: SearchGroupScreen,
 });
 
 GroupStack.navigationOptions = {

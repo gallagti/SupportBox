@@ -16,7 +16,6 @@ import { WebBrowser } from 'expo';
 //import { MonoText } from '../components/StyledText';
 import settingIcon from '../assets/images/settingIcon.png';
 import boxIcon from '../assets/images/SupportBoxMainLogoTranUpdated.png';
-import groupPic from '../assets/images/hands.png'
 import {StackNavigator} from "react-navigation";
 import MyGroupsScreen from "./MyGroupsScreen.js";
 import JoinGroupScreen from "./JoinGroupScreen.js";
@@ -71,9 +70,7 @@ export default class GroupBaseScreen extends React.Component {
                       </Content>
                    </View>
                    <View>
-
                </View>
-
            </ScrollView>
        );
    }

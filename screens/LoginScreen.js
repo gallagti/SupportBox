@@ -50,9 +50,8 @@ export default class LoginScreen extends React.Component {
   }
 }
 
-const styles = StyleSheet.create){
+const styles = StyleSheet.create({
   container:{
-    flex: 1,
     backgroundColor: '#57caff',
   },
   BoxIcon: {
@@ -63,4 +62,4 @@ const styles = StyleSheet.create){
     marginBottom: 20,
     alignSelf: 'center',
   },
-}
+});

@@ -23,7 +23,7 @@ import * as firebase from 'firebase';
 // Initialize Firebase
 //TODO change configs
 const firebaseConfig = {
-  apiKey: "AIzaSyDcEeWJw_U7T_Nm7uto-J5GCz9jHeEPJd0",
+  apiKey: "add our API key here!",
   authDomain: "supportbox-dd807.firebaseapp.com",
   databaseURL: "https://supportbox-dd807.firebaseio.com",
   projectId: "supportbox-dd807",

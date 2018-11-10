@@ -5,6 +5,7 @@ import {
   Image,
   Platform,
   StyleSheet,
+  ScrollView,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -16,25 +17,79 @@ import boxIcon from '../assets/images/SupportBoxMainLogoTranUpdated.png';
 
 import LoginScreen from "./LoginScreen.js";
 
+//initialize firebase
+import * as firebase from 'firebase';
+
+// Initialize Firebase
+//TODO change configs
+const firebaseConfig = {
+  apiKey: "add our API key here!",
+  authDomain: "supportbox-dd807.firebaseapp.com",
+  databaseURL: "https://supportbox-dd807.firebaseio.com",
+  projectId: "supportbox-dd807",
+  storageBucket: "supportbox-dd807.appspot.com",
+};
+
+firebase.initializeApp(firebaseConfig);
 
 export default class HomeScreen extends React.Component {
+
+  async loginWithFacebook() {
+    const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync(
+      '807211646276739',
+      { permissions: ['public_profile'] }
+    );
+
+    if (type === 'success') {
+      // Build Firebase credential with the Facebook access token.
+      const credential = firebase.auth.FacebookAuthProvider.credential(token);
+
+      // Sign in with credential from the Facebook user.
+      firebase.auth().signInWithCredential(credential).catch((error) => {
+        console.error("Loading user failed with error: " , error.message);
+        //can handle other error codes here if wanted
+        //see https://firebase.google.com/docs/reference/js/firebase.auth.Auth#signInWithCredential
+      });
+    }
+  }
+
+  componentDidMount() {
+
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user != null) {
+          console.log(user);
+        }
+      })
+    }
+
   static navigationOptions = {
     headerTransparent: true
   };
+
   render() {
     return (
-      <View style={styles.container}>
-
+    //  <View style={styles.container}>
+    <ScrollView style={styles.container}>
         <View style={styles.BoxIcon}>
-
             <Image
                 style={styles.BoxIcon}
                 source={require('../assets/images/SupportBoxMainLogoTranUpdated.png')}
             />
-
         </View>
-      </View>
+        <View>
+          <Content>
+            <Button
+              block style = {styles.MyGroupsButton}
+              //onPress={() => this.props.navigation.navigate('MyGroupsScreen')}
+              onPress={() => this.loginWithFacebook()}
+              >
+                <Text>Login With Facebook</Text>
+                </Button>
+          </Content>
+        </View>
+  </ScrollView>
 )}};
+
   _handleLearnMorePress = () => {
     WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/guides/development-mode');
   };
@@ -50,6 +105,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#57caff',
+  },
+  MyGroupsButton: {
+    marginTop: 50,
+    marginBottom: 15,
+    height: 70,
   },
   developmentModeText: {
     marginBottom: 20,

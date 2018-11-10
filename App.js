@@ -4,6 +4,8 @@ import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
 import {root} from "native-base";
 
+console.ignoredYellowBox = ['Warning:'];
+
 export default class App extends React.Component {
   state = {
     isLoadingComplete: false,
@@ -11,6 +13,7 @@ export default class App extends React.Component {
     fontLoaded: false,
 
   };
+
 
   render() {
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {

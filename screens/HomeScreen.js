@@ -7,6 +7,7 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  Alert,
   View,
 } from 'react-native';
 // Import statements go here, this includes pictures or tile pics from a file
@@ -16,23 +17,18 @@ import { MonoText } from '../components/StyledText';
 import boxIcon from '../assets/images/SupportBoxMainLogoTranUpdated.png';
 
 import LoginScreen from "./LoginScreen.js";
-
-//initialize firebase
+//import { db } from '../config/db.js';
 import * as firebase from 'firebase';
 
-// Initialize Firebase
-//TODO change configs
-const firebaseConfig = {
-  apiKey: "add our API key here!",
-  authDomain: "supportbox-dd807.firebaseapp.com",
-  databaseURL: "https://supportbox-dd807.firebaseio.com",
-  projectId: "supportbox-dd807",
-  storageBucket: "supportbox-dd807.appspot.com",
-};
-
-firebase.initializeApp(firebaseConfig);
-
 export default class HomeScreen extends React.Component {
+
+  constructor(props){
+    super(props)
+    this.state = ({
+      email: '',
+      password: ''
+    })
+  }
 
   async loginWithFacebook() {
     const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync(
@@ -85,6 +81,17 @@ export default class HomeScreen extends React.Component {
               >
                 <Text>Login With Facebook</Text>
                 </Button>
+                <Button
+                  block style = {styles.MyGroupsButton}
+                  onPress={() =>
+                    Alert.alert(
+                      'this is not handled yet'
+                    )
+                  }
+                  >
+                  <Text>Logout</Text>
+
+                </Button>
           </Content>
         </View>
   </ScrollView>
@@ -100,6 +107,15 @@ export default class HomeScreen extends React.Component {
     );
   };
 
+/*
+  _onLoadUserCompleted(user){
+
+  }
+
+  _onLogout(){
+    this.props.navigation
+  }
+*/
 
 const styles = StyleSheet.create({
   container: {

@@ -4,6 +4,9 @@ import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
 import {root} from "native-base";
 
+import {db} from './config/db';
+//import * as firebase from 'firebase';
+
 console.ignoredYellowBox = ['Warning:'];
 
 export default class App extends React.Component {

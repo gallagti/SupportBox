@@ -1,140 +1,125 @@
-import React from 'react';
-import Icon from 'react-native-vector-icons/FontAwesome';
-//import * as firebase from 'firebase';
-import { Container, Header, Content, Button, Text, Left, Body, Title, Right} from 'native-base';
+import React, { Component } from 'react';
 import {
-  Image,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
   View,
+  Text,
+  StyleSheet,
+  Alert,
+  ListView,
+  ScrollView,
+  TouchableHighlight
 } from 'react-native';
-// Import statements go here, this includes pictures or tile pics from a file
 
-import { WebBrowser } from 'expo';
-//import { MonoText } from '../components/StyledText';
-import settingIcon from '../assets/images/settingIcon.png';
-import boxIcon from '../assets/images/SupportBoxMainLogoTranUpdated.png';
-import groupPic from '../assets/images/hands.png'
+import GroupComponent from '../components/GroupComponent';
 
+import {db} from '../config/db';
+//import * as firebase from 'firebase';
 
+//let groupsRef = db.ref('/Groups')
 
-
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      backgroundColor: '#57caff',
+    }
+  })
 
 export default class MyGroupsScreen extends React.Component {
-  static navigationOptions = {
-    header: (
-      <Header>
-        <Left>
-          <Button transparent onPress={() => navigation.goBack()}>
-            <Icon name="arrow-back" />
-          </Button>
-        </Left>
-        <Body>
-          <Title>Groups</Title>
-        </Body>
-        <Right />
-      </Header>
-    )
-    //headerTransparent: true
-  };
-
-  render() {
-      const {navigate} = this.props.navigation;
-       return (
-         <View style={styles.BoxIcon}>
-         <Text>
-         Here are your Groups
-         </Text>
-         </View>
+  constructor(){
+    super();
+    let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    this.state = {
+      groups: [],
+      GroupDataSource: ds
+    }
 
 
+    //this.groupsRef = this.getRef().child('Groups')
+    this.groupsRef = this.getRef();
+    this.renderRow = this.renderRow.bind(this);
+    this.pressRow = this.pressRow.bind(this);
+
+  }
+
+  getRef(){
+    return db.ref('/Groups');
+  }
+
+  componentWillMount(){
+    this.getGroups(this.groupsRef)
+  }
+
+  componentDidMount() {
+
+    //this.getGroups(this.groupsRef)
+    this.getGroups(this.groupsRef)
+    }
+
+    getGroups(groupsRef){
+      /*
+      Alert.alert(
+        'getGroups called'
+      );
+
+      db.ref('/Groups').on('value', function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+          this.state.groups.push({
+              name: childSnapshot.val().Name,
+              _key: childSnapshot.key
+          });
+        });
+        this.setState({
+          GroupDataSource: this.state.GroupDataSource.cloneWithRows(groups)
+      });
+      });
+
+*/
+      db.ref('/Groups').on('value', (snap) => {
+        //let groups = [];
+        snap.forEach((child) => {
+          this.state.groups.push({
+            name: child.val().Name,
+            _key: child.key
+          });
+        });
+        this.setState({
+          groups: this.state.groups
+        });
+      });
+
+    }
+
+    pressRow(){
+      //console.log(group)
+    }
+
+    renderRow(group){
+      return(
+          <View>
+            <Text>
+              {group.name}
+            </Text>
+          </View>
+      );
+    }
+
+    render() {
+        return (
+            <View style={styles.container}>
+              <GroupComponent groups={this.state.groups} />
+            </View>
+        )
+    }
+}
 
 /*
-          <ScrollView style={styles.container}>
-                   <View style={styles.BoxIcon}>
+              this.state.GroupDataSource.length > 0
+              ? <GroupComponent groups={this.state.groups} />
+              : <Text>No groups</Text>
 
-                       <Image
-                           style={styles.BoxIcon}
-                           source={require('../assets/images/SupportBoxMainLogoTranUpdated.png')}
-                       />
-
-                       <Text>
-                       Here are your Groups
-                       </Text>
-
-                   </View>
-           </ScrollView>
-           */
-       );
-   }
- }
-
-
-   const styles = StyleSheet.create({
-     container: {
-       flex: 1,
-       backgroundColor: '#57caff' ,
-     },
-     MyGroupsButton: {
-       marginTop: 50,
-       marginBottom: 15,
-       height: 70,
-     },
-     JoinAGroupButton: {
-       marginBottom: 15,
-       height: 70,
-     },
-     SearchAGroupButton: {
-       marginBottom: 15,
-       height: 70,
-     },
-
-     MyGroupsText: {
-       fontSize: 42,
-       color: 'rgba(252, 249, 233, 1)',
-       lineHeight: 40,
-       textAlign: 'center',
-       fontWeight: 'bold',
-       marginBottom: 10,
-     },
-     BoxIcon: {
-       resizeMode: 'contain',
-       width: 200,
-       height: 200,
-       marginTop: 20,
-       marginBottom: 20,
-       alignSelf: 'center',
-     },
-     navigationFilename: {
-       marginTop: 5,
-     },
-     tabBarInfoContainer: {
-       position: 'relative',
-       bottom: 0,
-       left: 0,
-       right: 0,
-       top: 10,
-       ...Platform.select({
-         ios: {
-           shadowColor: 'black',
-           shadowOffset: { height: -3 },
-           shadowOpacity: 0.1,
-           shadowRadius: 3,
-         },
-         android: {
-           elevation: 20,
-         },
-       }),
-       alignItems: 'center',
-       backgroundColor: '#0f5870', // Good secondary color
-       paddingVertical: 20,
-     },
-     tabBarInfoText: {
-       fontSize: 17,
-       color: 'rgba(252, 249, 233, 1)',
-       textAlign: 'center',
-     },
-
-   });
+                  <ListView
+                    dataSource={this.state.GroupDataSource}
+                    renderRow={this.renderRow}
+                  />
+                  */
+                //  <GroupComponent groups={this.state.groups} />

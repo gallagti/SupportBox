@@ -20,7 +20,6 @@ import LoginScreen from "./LoginScreen.js";
 //import { db } from '../config/db.js';
 import * as firebase from 'firebase';
 
-
 export default class HomeScreen extends React.Component {
 
   constructor(props){

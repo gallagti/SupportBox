@@ -56,9 +56,12 @@ class GroupComponent extends Component {
       <ScrollView style={styles.container}>
         {
 
-          this.arrayUnique(this.props.groups).map((group, index) => {
+        //  this.arrayUnique(this.props.groups).map((group, index) => {
+        //this.props.groups.forEach(function(group) {
+        this.arrayUnique(this.props.groups).forEach(function(group) {
             return (
-                <View key={index}>
+                //<View key={index}>
+                <View>
                     <Text style={styles.groupstext}>
                     {group.name}
                     </Text>

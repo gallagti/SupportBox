@@ -71,6 +71,8 @@ export default class MyGroupsScreen extends React.Component {
       group: ""
     }
 
+    //group: this.props.navigation.state.params.group
+
 
     this.groupsRef = this.getRef();
     this.pressRow = this.pressRow.bind(this);
@@ -137,7 +139,7 @@ export default class MyGroupsScreen extends React.Component {
         block style = {styles.JoinAGroupButton}
         onPress={() =>
         //  alert("pressed")}
-          this.props.navigation.navigate('GroupScreen', {group: group.name})}
+          this.props.navigation.navigate('GroupScreen')}
         >
 
           <Text>
@@ -146,23 +148,14 @@ export default class MyGroupsScreen extends React.Component {
         </Button>
       );
     }
-    //alert("you pressed me")}
-    //this.props.navigation.navigate('GroupScreen', {group: group})}
 
     render(){
       return(
         <ScrollView style={styles.container}>
 
-        <View>
-        <Content>
-          <ListView
-            dataSource={this.state.dataSource}
-            enableEmptySections={true}
-            renderRow={this.renderRow}
-            style={styles.listView}
-          />
-          </Content>
-          </View>
+        <Text>
+        {this.props.navigation.state.params.group}
+        </Text>
 
         </ScrollView>
       );

@@ -17,6 +17,7 @@ import SettingsScreen from '../screens/SettingsScreen';
 import JoinGroupScreen from '../screens/JoinGroupScreen';
 import SearchGroupScreen from '../screens/SearchGroupScreen';
 import CreateGroupScreen from "../screens/CreateGroupScreen";
+import GroupScreen from "../screens/GroupScreen";
 
 //import SearchGroupScreen from '../screens/SearchGroupScreen';
 
@@ -48,6 +49,7 @@ const GroupStack = createStackNavigator({
   JoinGroupScreen: JoinGroupScreen,
   SearchGroupScreen: SearchGroupScreen,
   CreateGroupScreen: CreateGroupScreen,
+  GroupScreen: GroupScreen,
 });
 
 GroupStack.navigationOptions = {

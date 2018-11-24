@@ -137,7 +137,7 @@ export default class MyGroupsScreen extends React.Component {
         block style = {styles.JoinAGroupButton}
         onPress={() =>
         //  alert("pressed")}
-          this.props.navigation.navigate('GroupScreen', {group: group.name})}
+          this.props.navigation.navigate('GroupScreen', {group: group._key})}
         >
 
           <Text>

@@ -99,7 +99,7 @@ class Fire {
 
   // close the connection to the Backend
   off() {
-    this.ref.off();
+    this.messagesref.child("1").off();
   }
 }
 

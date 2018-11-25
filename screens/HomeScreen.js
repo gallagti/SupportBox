@@ -8,6 +8,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Alert,
+  TextInput,
   View,
 } from 'react-native';
 // Import statements go here, this includes pictures or tile pics from a file
@@ -16,9 +17,11 @@ import { WebBrowser } from 'expo';
 import { MonoText } from '../components/StyledText';
 import boxIcon from '../assets/images/SupportBoxMainLogoTranUpdated.png';
 
-import LoginScreen from "./LoginScreen.js";
+//import LoginScreen from "./LoginScreen.js";
+import GroupBaseScreen from "./GroupBaseScreen.js";
+//import {db} from '../config/db';
 //import { db } from '../config/db.js';
-import * as firebase from 'firebase';
+//import * as firebase from 'firebase';
 
 
 export default class HomeScreen extends React.Component {
@@ -26,11 +29,13 @@ export default class HomeScreen extends React.Component {
   constructor(props){
     super(props)
     this.state = ({
-      email: '',
-      password: ''
+      currentUser: null,
     })
   }
 
+
+
+/*
   async loginWithFacebook() {
     const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync(
       '807211646276739',
@@ -49,19 +54,18 @@ export default class HomeScreen extends React.Component {
       });
     }
   }
-
-  componentDidMount() {
-
-      firebase.auth().onAuthStateChanged((user) => {
-        if (user != null) {
-          console.log(user);
-        }
-      })
-    }
-
+*/
   static navigationOptions = {
     headerTransparent: true
   };
+
+/*
+  onPress = () =>
+      this.props.navigation.navigate('GroupBaseScreen', { name: this.state.name });
+*/
+onPress = () =>
+    this.props.navigation.navigate('GroupBaseScreen');
+  //onChangeText = name => this.setState({ name });
 
   render() {
     return (
@@ -75,24 +79,16 @@ export default class HomeScreen extends React.Component {
         </View>
         <View>
           <Content>
-            <Button
-              block style = {styles.MyGroupsButton}
-              //onPress={() => this.props.navigation.navigate('MyGroupsScreen')}
-              onPress={() => this.loginWithFacebook()}
-              >
-                <Text>Login With Facebook</Text>
-                </Button>
-                <Button
-                  block style = {styles.MyGroupsButton}
-                  onPress={() =>
-                    Alert.alert(
-                      'this is not handled yet'
-                    )
-                  }
-                  >
-                  <Text>Logout</Text>
-
-                </Button>
+          <Text style={styles.title}>Enter your name:</Text>
+      <TextInput
+        style={styles.nameInput}
+        placeHolder="Enter a username"
+        onChangeText={this.onChangeText}
+        value={this.state.name}
+      />
+      <TouchableOpacity onPress={this.onPress}>
+        <Text style={styles.buttonText}>Next</Text>
+      </TouchableOpacity>
           </Content>
         </View>
   </ScrollView>
@@ -117,7 +113,7 @@ export default class HomeScreen extends React.Component {
     this.props.navigation
   }
 */
-
+const offset = 24;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -213,6 +209,23 @@ const styles = StyleSheet.create({
   },
   helpLink: {
     paddingVertical: 15,
+  },
+  title: {
+    marginTop: offset,
+    marginLeft: offset,
+    fontSize: offset,
+  },
+  nameInput: {
+    height: offset * 2,
+
+    margin: offset,
+    paddingHorizontal: offset,
+    borderColor: '#111111',
+    borderWidth: 1,
+  },
+  buttonText: {
+    marginLeft: offset,
+    fontSize: offset,
   },
   helpLinkText: {
     fontSize: 14,

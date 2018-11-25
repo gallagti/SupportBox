@@ -21,14 +21,50 @@ import MyGroupsScreen from "./MyGroupsScreen.js";
 import JoinGroupScreen from "./JoinGroupScreen.js";
 import CreateGroupScreen from "./CreateGroupScreen.js";
 import SearchGroupScreen from "./SearchGroupScreen.js";
+//import {db} from "../config/db.js"
+//import Fire from "../newdb";
+
 
 export default class GroupBaseScreen extends React.Component {
+  constructor(){
+    super();
+    this.state = {
+      currentUser: '',
+    }
+  }
+
   static navigationOptions = {
     headerTransparent: true
   };
+/*
+  static navigationOptions = ({ navigation }) => ({
+    title: (navigation.state.params || {}).name || 'Chat!',
+  });
 
+  componentDidMount() {
+    db.auth().onAuthStateChanged(user => {
+      if (!user) {
+        try {
+          db.auth().signInAnonymously();
+        } catch ({ message }) {
+          alert(message);
+        }
+      }
+    })
+    */
+/*
+    this.setState({
+      currentUser: this.props.navigation.state.params.name
+    });
+*/
+
+  //<Text style={styles.tabBarInfoText}>Welcome to SupportBox!</Text>
+//updateUser = name => this.setState({ name });
   render() {
       //const {navigate} = this.props.navigation;
+      //var name = this.props.navigation.state.params.name;
+      //const {names} = this.props.navigation.state.params;
+    //  const name = this.props.navigation.getParam('name', 'No param found')
        return (
           <ScrollView style={styles.container}>
                    <View style={styles.BoxIcon}>
@@ -41,7 +77,7 @@ export default class GroupBaseScreen extends React.Component {
                    </View>
 
                    <View style={styles.tabBarInfoContainer}>
-                     <Text style={styles.tabBarInfoText}>Welcome Joe Smith to SupportBox!</Text>
+                     <Text style={styles.tabBarInfoText}>Welcome to SupportBox!</Text>
                    </View>
 
                    <View>
@@ -49,20 +85,15 @@ export default class GroupBaseScreen extends React.Component {
                       <Content>
                         <Button
                         block style = {styles.MyGroupsButton}
+                        //onPress={() => this.props.navigation.navigate('MyGroupsScreen', {name: name})}
                         onPress={() => this.props.navigation.navigate('MyGroupsScreen')}
                         >
                           <Text>My Groups</Text>
                         </Button>
 
                         <Button
-                        block style = {styles.JoinAGroupButton}
-                        onPress={() => this.props.navigation.navigate('JoinGroupScreen')}
-                        >
-                          <Text>Join a Group</Text>
-                        </Button>
-
-                        <Button
                         block style = {styles.SearchAGroupButton}
+                        //onPress={() => this.props.navigation.navigate('CreateGroupScreen', {name: name})}
                         onPress={() => this.props.navigation.navigate('CreateGroupScreen')}
                         >
                           <Text>Create a Group</Text>

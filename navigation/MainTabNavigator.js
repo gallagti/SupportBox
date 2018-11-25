@@ -4,7 +4,8 @@ import {
 } from 'react-native';
 import {
   createStackNavigator,
-  createBottomTabNavigator
+  createBottomTabNavigator,
+  lazy
 } from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
@@ -24,6 +25,7 @@ import GroupScreen from "../screens/GroupScreen";
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
+  GroupBaseScreen: GroupBaseScreen,
 });
 //is a test
 HomeStack.navigationOptions = {
@@ -112,4 +114,4 @@ export default createBottomTabNavigator({
   GroupStack,
   LinksStack,
   SettingsStack,
-});
+}, {lazy: true});

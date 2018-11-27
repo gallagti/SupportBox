@@ -10,6 +10,7 @@ import {
   Alert,
   ListView,
   ScrollView,
+  AsyncStorage,
   TouchableHighlight
 } from 'react-native';
 
@@ -52,23 +53,6 @@ export default class MyGroupsScreen extends React.Component<Props> {
     this.renderRow = this.renderRow.bind(this);
     //this.getGroups = this.getGroups.bind(this);
   }
-/*
-  componentDidMount() {
-    db.auth().onAuthStateChanged(user => {
-      if (!user) {
-        try {
-          db.auth().signInAnonymously();
-        } catch ({ message }) {
-          alert(message);
-        }
-      }
-    })
-
-     this.setState({
-      // currentUser: this.props.navigation.state.params.name
-     });
-  }
-  */
 
   static navigationOptions = ({navigation}) => ({
     header: (
@@ -93,6 +77,7 @@ export default class MyGroupsScreen extends React.Component<Props> {
 
 
 
+/*
     getGroupMessages(groupsRef){
       var groupKey = this.props.navigation.state.params.group;
     // listen for changes to the tasks reference, when it updates we'll get a
@@ -104,7 +89,7 @@ export default class MyGroupsScreen extends React.Component<Props> {
         alert("pushing message");
         messages.push({
           author: child.val().author,
-          message: child.val().message,
+          text: child.val().message,
           _key: child.key
         });
       });
@@ -119,7 +104,7 @@ export default class MyGroupsScreen extends React.Component<Props> {
     });
 
   }
-
+*/
 /*
   getGroupMessages(groupsRef){
     var groupKey = this.props.navigation.state.params.group;
@@ -180,41 +165,59 @@ export default class MyGroupsScreen extends React.Component<Props> {
     };
   }
 
+    get_group_key = async() => {
+      try {
+        const value = await AsyncStorage.getItem('group_key');
+        if(value !== null){
+          //return value;
+            alert('value from groupScreen = ' + value);
+        }
+        else alert('value is null');
+      }
+      catch (error){
+        alert('error retrieving the group messages, please contact the developers')
+      }
+    }
+
+
     render(){
-      var groupMessageRef = Fire.shared.groupmessage("1");
+      var groupMessageRef = this.get_group_key;
+      //alert(groupKey);
       return(
         <GiftedChat
           messages = {this.state.messages}
           onSend={Fire.shared.send}
           user= {this.user}
           />
-        /*
-        <ScrollView style={styles.container}>
-          <View>
-            <Content>
-              <ListView
-                dataSource={this.state.dataSource}
-                enableEmptySections={true}
-                renderRow={this.renderRow}
-                style={styles.listView}
-              />
-            </Content>
-          </View>
-        </ScrollView>
-        */
       );
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+      var AsyncVal = await AsyncStorage.getItem('group_key');
+      await this.setState({
+        groupKey: AsyncVal,
+      })
+      //alert('group key in groupscreen = ' + this.state.groupKey)
       //var groupMessageRef = Fire.shared.groupmessage("1");
+      //Fire.shared.messagesref.child("-LRPm6qpHonvge63oMKl").remove();
       Fire.shared.on(message =>
             this.setState(previousState => ({
               messages: GiftedChat.append(previousState.messages, message),
             }))
           );
+/*
+      Fire.shared.on(message =>
+            this.setState(previousState => ({
+              messages: GiftedChat.append(previousState.messages, message),
+            })), this.state.groupKey
+          );
+
+          */
     }
+
+
     componentWillUnmount(){
-      Fire.shared.off();
+      Fire.shared.off(this.state.groupKey);
       //this.getGroupMessages(this.groupsRef)
     }
 }

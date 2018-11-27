@@ -1,17 +1,8 @@
-//import { db } from '../config/db';
-//import * as firebase from 'firebase';
-import {db} from '../config/db';
-
-
-//this.itemsRef = db.ref('/Groups')
+//import {db} from '../config/db';
+import Fire from "../config/newdb";
 
 export const addGroup =  (group) => {
   db.ref('/Groups').push({
     Name: group
   })
-  /*
-    db.ref('/Groups').push({
-        Name: group
-    });
-    */
 }

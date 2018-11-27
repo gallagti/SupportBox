@@ -1,4 +1,7 @@
 import firebase from 'firebase'; // 4.8.1
+import {
+  AsyncStorage
+} from 'react-native';
 
 class Fire {
   constructor() {
@@ -58,6 +61,22 @@ class Fire {
     return firebase;
   }
 
+
+  get_group_key = async() => {
+    try {
+      const value = await AsyncStorage.getItem('group_key');
+      if(value !== null){
+        //return value;
+          alert('value from groupScreen = ' + value);
+      }
+      else alert('value is null');
+    }
+    catch (error){
+      alert('error retrieving the group messages, please contact the developers')
+    }
+  }
+
+
   parse = snapshot => {
     const { timestamp: numberStamp, text, user } = snapshot.val();
     const { key: _id } = snapshot;
@@ -71,19 +90,42 @@ class Fire {
     return message;
   };
 
+  addGroup = groupName =>
+    this.groupsref.push({
+      Name: groupName
+    })
 
 
-  on = callback =>
+  on = async callback => {
     //groupMessageRef
-    this.messagesref.child("1")
+    var group_key = await AsyncStorage.getItem('group_key');
+    this.messagesref.child(group_key)
       .limitToLast(20)
       .on('child_added', snapshot => callback(this.parse(snapshot)));
+}
+/*
+async on(callback){
+  try{
+    var group_key = await AsyncStorage.getItem('group_key');
+  }
+  catch (error){
+    alert('error retrieving the group messages, please contact the developers')
+  }
+  finally{
+    this.messagesref.child(group_key)
+      .limitToLast(20)
+      .on('child_added', snapshot => callback(this.parse(snapshot)));
+  }
+}
+*/
 
   get timestamp() {
     return firebase.database.ServerValue.TIMESTAMP;
   }
   // send the message to the Backend
-  send = messages => {
+  send = async messages => {
+    var group_key = await AsyncStorage.getItem('group_key');
+    
     for (let i = 0; i < messages.length; i++) {
       const { text, user } = messages[i];
       const message = {
@@ -91,15 +133,15 @@ class Fire {
         user,
         timestamp: this.timestamp,
       };
-      this.append(message);
+      this.append(message, group_key);
     }
   };
 
-  append = (message) => this.messagesref.child("1").push(message);
+  append = (message, group_key) => this.messagesref.child(group_key).push(message);
 
   // close the connection to the Backend
-  off() {
-    this.messagesref.child("1").off();
+  off = group_key => {
+    this.messagesref.child(group_key).off();
   }
 }
 

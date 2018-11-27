@@ -12,7 +12,7 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import GroupBaseScreen from '../screens/GroupBaseScreen';
 import MyGroupsScreen from '../screens/MyGroupsScreen';
-import LinksScreen from '../screens/LinksScreen';
+//import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 //import LoginScreen from '../screens/LoginScreen';
 import JoinGroupScreen from '../screens/JoinGroupScreen';
@@ -71,25 +71,6 @@ GroupStack.navigationOptions = {
   ),
 };
 
-const LinksStack = createStackNavigator({
-  Links: LinksScreen,
-});
-
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
-  tabBarIcon: ({
-    focused
-  }) => ( <
-    TabBarIcon focused = {
-      focused
-    }
-    name = {
-      Platform.OS === 'ios' ? `ios-link${focused ? '' : '-outline'}` : 'md-link'
-    }
-    />
-  ),
-};
-
 const SettingsStack = createStackNavigator({
   Settings: SettingsScreen,
 });
@@ -112,6 +93,5 @@ SettingsStack.navigationOptions = {
 export default createBottomTabNavigator({
   HomeStack,
   GroupStack,
-  LinksStack,
   SettingsStack,
 }, {lazy: true});

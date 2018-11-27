@@ -7,7 +7,7 @@ import {root} from "native-base";
 import {db} from './config/db';
 //import * as firebase from 'firebase';
 
-console.ignoredYellowBox = ['Warning:'];
+console.ignoredYellowBox = ['Warning:', 'Setting a timer'];
 
 export default class App extends React.Component {
   state = {

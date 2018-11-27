@@ -10,6 +10,7 @@ import {
   Alert,
   ListView,
   ScrollView,
+  AsyncStorage,
   TouchableHighlight
 } from 'react-native';
 
@@ -119,6 +120,21 @@ export default class MyGroupsScreen extends React.Component {
     });
   }
 
+    store_group_key = async groupKey => {
+      await AsyncStorage.setItem('group_key', groupKey);
+      const value = await AsyncStorage.getItem('group_key');
+      if(value === null){
+        alert('value is null');
+      }
+      /*
+      else{
+        alert('value = ' + value);
+      }
+      */
+    }
+
+
+
     pressRow(){
       //console.log(group)
     }
@@ -129,13 +145,18 @@ export default class MyGroupsScreen extends React.Component {
       return(
         <Button
         block style = {styles.JoinAGroupButton}
-        onPress={() =>
-        //  alert("pressed")}
-        //  this.props.navigation.navigate('GroupScreen')}
-          this.props.navigation.navigate('GroupScreen', {groupKey: group._key})}
-          //{group: group._key, name: name})}
+        onPress={() => {
+          try{
+            this.store_group_key(group._key)
+          }
+          catch(error){
+            alert('error retrieving the group messages, please contact the developers')
+          }
+          finally{
+            this.props.navigation.navigate('GroupScreen')}
+          }
+        }
         >
-
           <Text>
             {group.name}
           </Text>

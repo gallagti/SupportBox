@@ -16,13 +16,14 @@ import { WebBrowser } from 'expo';
 import { MonoText } from '../components/StyledText';
 import boxIcon from '../assets/images/SupportBoxMainLogoTranUpdated.png';
 import GroupBaseScreen from "./GroupBaseScreen.js";
+import BoxRegisterScreen from "./BoxRegisterScreen.js";
 
 export default class HomeScreen extends React.Component {
 
   constructor(props){
     super(props)
     this.state = ({
-      currentUser: null,
+      box_num: null,
     })
   }
 
@@ -31,7 +32,13 @@ export default class HomeScreen extends React.Component {
   };
 
 onPress = () =>
-    this.props.navigation.navigate('GroupBaseScreen');
+    this.props.navigation.navigate('MyGroupsScreen');
+
+onPressRegister = () =>
+    this.props.navigations.navigate('BoxRegisterScreen', {box_number: this.state.box_number});
+
+onChangeText = box_number => this.setState({ box_number });
+
 
   render() {
     return (
@@ -44,16 +51,31 @@ onPress = () =>
         </View>
         <View>
           <Content>
-          <Text style={styles.title}>Enter your name:</Text>
+      <Button
+      block style = {styles.MyGroupsButton}
+      onPress={this.onPress}
+      >
+        <Text>Continue Anonymously</Text>
+      </Button>
+
       <TextInput
         style={styles.nameInput}
-        placeHolder="Enter a username"
+        placeHolder="Enter Your Box Number"
         onChangeText={this.onChangeText}
-        value={this.state.name}
-      />
+        value={this.state.box_num}
+        />
+        <Button
+        block style = {styles.MyGroupsButton}
+        onPress={this.onPress}
+        >
+          <Text>Register Your Box</Text>
+        </Button>
+
+/*
       <TouchableOpacity onPress={this.onPress}>
         <Text style={styles.buttonText}>Next</Text>
       </TouchableOpacity>
+      */
           </Content>
         </View>
   </ScrollView>

@@ -39,6 +39,10 @@ class Fire {
     return firebase.database().ref('\Messages');
   }
 
+  get boxref(){
+    return firebase.database().ref('\Box');
+  }
+
   get groupsref() {
     return firebase.database().ref('\Groups');
   }
@@ -48,6 +52,12 @@ class Fire {
     return firebase.database().ref('\Messages').orderByKey().equalTo(groupKey);
   }
   */
+
+  box_groupid_ref = box_id =>{
+    firebase.database().ref('\Box').orderByKey().equalTo(box_id).child('\group_id').update({
+
+    })
+  }
 
   groupmessage = groupKey => {
     return firebase.database().ref('\Messages').orderByKey().equalTo(groupKey);
@@ -125,7 +135,7 @@ async on(callback){
   // send the message to the Backend
   send = async messages => {
     var group_key = await AsyncStorage.getItem('group_key');
-    
+
     for (let i = 0; i < messages.length; i++) {
       const { text, user } = messages[i];
       const message = {
@@ -143,6 +153,12 @@ async on(callback){
   off = group_key => {
     this.messagesref.child(group_key).off();
   }
+
+  register_box = async => {
+    var group_key = await AsyncStorage.getItem('group_key');
+
+  }
+
 }
 
 Fire.shared = new Fire();

@@ -10,13 +10,10 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-// Import statements go here, this includes pictures or tile pics from a file
 
 import { WebBrowser } from 'expo';
 import { MonoText } from '../components/StyledText';
 import boxIcon from '../assets/images/SupportBoxMainLogoTranUpdated.png';
-
-
 
 export default class LoginScreen extends React.Component {
   static navigationOptions = {
@@ -43,9 +40,6 @@ export default class LoginScreen extends React.Component {
 
       </View>
       </View>
-
-
-
     );
   }
 }

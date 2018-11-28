@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-//import Icon from 'react-native-vector-icons/FontAwesome';
 import {StackNavigator} from "react-navigation";
 import GroupScreen from "./GroupScreen.js";
 
@@ -27,7 +26,6 @@ import {
 import GroupComponent from '../components/GroupComponent';
 import { GiftedChat, Actions, Bubble } from 'react-native-gifted-chat';
 
-//import {db} from '../config/db';
 import Fire from "../config/newdb";
 
 export default class MyGroupsScreen extends React.Component<Props> {
@@ -40,18 +38,10 @@ export default class MyGroupsScreen extends React.Component<Props> {
       loadEarlier: true,
       typingText: null,
       isLoadingEarlier: false,
-      //groups: [],
-      //dataSource: ds,
-    //  group: "",
-      //currentUser: null
     }
 
-    //group: this.props.navigation.state.params.group
-
-    //this.groupsRef = this.getRef();
-    this.pressRow = this.pressRow.bind(this);
+  //  this.pressRow = this.pressRow.bind(this);
     this.renderRow = this.renderRow.bind(this);
-    //this.getGroups = this.getGroups.bind(this);
   }
 
   static navigationOptions = ({navigation}) => ({
@@ -68,83 +58,11 @@ export default class MyGroupsScreen extends React.Component<Props> {
         <Right style={styles.headerright}/>
       </Header>
     )
-    //headerTransparent: true
   });
 
   getRef(){
     return db.database().ref('/Groups');
   }
-
-
-
-/*
-    getGroupMessages(groupsRef){
-      var groupKey = this.props.navigation.state.params.group;
-    // listen for changes to the tasks reference, when it updates we'll get a
-    // dataSnapshot from firebase
-    db.database().ref('\Messages').orderByKey().equalTo(groupKey).on('value', (dataSnapshot) => {
-      // transform the children to an array
-      var messages = [];
-      dataSnapshot.forEach((child) => {
-        alert("pushing message");
-        messages.push({
-          author: child.val().author,
-          text: child.val().message,
-          _key: child.key
-        });
-      });
-       // Update the state with the new tasks
-       messages.push({
-         author: "manual entry",
-         message: "if this is the only entry then no messages were added",
-       });
-      this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(messages)
-      });
-    });
-
-  }
-*/
-/*
-  getGroupMessages(groupsRef){
-    var groupKey = this.props.navigation.state.params.group;
-  // listen for changes to the tasks reference, when it updates we'll get a
-  // dataSnapshot from firebase
-  db.ref('\Messages').orderByKey().equalTo(groupKey).on('value', (dataSnapshot) => {
-    // transform the children to an array
-    var messages = [];
-    dataSnapshot.forEach((child) => {
-      //should only return one, but need to loop again to go through
-      //all the subchildren
-      child.forEach((subchild) => {
-        //alert("pushing message");
-        messages.push({
-          _id: subchild.key
-          timestamp:
-          text:
-          user:
-        //  author: subchild.val().author,
-        //  message: subchild.val().message,
-        //  _key: child.key
-        });
-      });
-    });
-     // Update the state with the new tasks
-     messages.push({
-       author: "manual entry",
-       message: "if this is the only entry then no messages were added in this group",
-     });
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(messages)
-    });
-  });
-
-}
-*/
-
-    pressRow(){
-      //console.log(group)
-    }
 
     renderRow(message){
       return(
@@ -179,10 +97,8 @@ export default class MyGroupsScreen extends React.Component<Props> {
       }
     }
 
-
     render(){
       var groupMessageRef = this.get_group_key;
-      //alert(groupKey);
       return(
         <GiftedChat
           messages = {this.state.messages}
@@ -197,30 +113,18 @@ export default class MyGroupsScreen extends React.Component<Props> {
       await this.setState({
         groupKey: AsyncVal,
       })
-      //alert('group key in groupscreen = ' + this.state.groupKey)
-      //var groupMessageRef = Fire.shared.groupmessage("1");
-      //Fire.shared.messagesref.child("-LRPm6qpHonvge63oMKl").remove();
       Fire.shared.on(message =>
             this.setState(previousState => ({
               messages: GiftedChat.append(previousState.messages, message),
             }))
           );
-/*
-      Fire.shared.on(message =>
-            this.setState(previousState => ({
-              messages: GiftedChat.append(previousState.messages, message),
-            })), this.state.groupKey
-          );
-
-          */
     }
-
 
     componentWillUnmount(){
       Fire.shared.off(this.state.groupKey);
-      //this.getGroupMessages(this.groupsRef)
     }
 }
+
 const styles = StyleSheet.create({
   listView: {
     flex: 1,

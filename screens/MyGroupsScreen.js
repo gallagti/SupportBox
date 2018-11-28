@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-//import Icon from 'react-native-vector-icons/FontAwesome';
 import {StackNavigator} from "react-navigation";
 import GroupScreen from "./GroupScreen.js";
 
@@ -26,7 +25,6 @@ import {
 } from 'native-base';
 import GroupComponent from '../components/GroupComponent';
 
-//import {db} from '../config/db';
 import Fire from "../config/newdb";
 
 export default class MyGroupsScreen extends React.Component {
@@ -40,12 +38,7 @@ export default class MyGroupsScreen extends React.Component {
       currentUser: ""
     }
 
-
-    //this.groupsRef = this.getRef();
-
-    this.pressRow = this.pressRow.bind(this);
     this.renderRow = this.renderRow.bind(this);
-    //this.getGroups = this.getGroups.bind(this);
   }
 
   static navigationOptions = ({navigation}) => ({
@@ -62,17 +55,9 @@ export default class MyGroupsScreen extends React.Component {
         <Right style={styles.headerright}/>
       </Header>
     )
-    //headerTransparent: true
   });
 
-/*
-  getRef(){
-  //  return db.database().ref('/Groups');
-    return Fire.shared.
-  }
-*/
   componentWillMount(){
-    //this.getGroups(this.groupsRef)
     this.getGroups(Fire.shared.groupsref)
   }
 
@@ -80,30 +65,7 @@ export default class MyGroupsScreen extends React.Component {
     this.getGroups(Fire.shared.groupsref)
   }
 
-/*
-  componentDidMount() {
-    db.auth().onAuthStateChanged(user => {
-      if (!user) {
-        try {
-          db.auth().signInAnonymously();
-        } catch ({ message }) {
-          alert(message);
-        }
-      }
-    })
-
-    this.setState({
-      //currentUser: this.props.navigation.state.params.name
-    });
-    this.getGroups(this.groupsRef)
-
-  }
-  */
-
     getGroups(groupsRef){
-    // listen for changes to the tasks reference, when it updates we'll get a
-    // dataSnapshot from firebase
-    //db.database().ref('\Groups').on('value', (dataSnapshot) => {
     groupsRef.on('value', (dataSnapshot) => {
       // transform the children to an array
       var tasks = [];
@@ -113,7 +75,6 @@ export default class MyGroupsScreen extends React.Component {
           _key: child.key
         });
       });
-       // Update the state with the new tasks
       this.setState({
         dataSource: this.state.dataSource.cloneWithRows(tasks)
       });
@@ -126,22 +87,9 @@ export default class MyGroupsScreen extends React.Component {
       if(value === null){
         alert('value is null');
       }
-      /*
-      else{
-        alert('value = ' + value);
-      }
-      */
-    }
-
-
-
-    pressRow(){
-      //console.log(group)
     }
 
     renderRow(group){
-      //var name = this.props.navigation.state.params.name;
-
       return(
         <Button
         block style = {styles.JoinAGroupButton}
@@ -153,9 +101,9 @@ export default class MyGroupsScreen extends React.Component {
             alert('error retrieving the group messages, please contact the developers')
           }
           finally{
-            this.props.navigation.navigate('GroupScreen')}
+            this.props.navigation.navigate('GroupScreen')
           }
-        }
+        }}
         >
           <Text>
             {group.name}
@@ -163,8 +111,6 @@ export default class MyGroupsScreen extends React.Component {
         </Button>
       );
     }
-    //alert("you pressed me")}
-    //this.props.navigation.navigate('GroupScreen', {group: group})}
 
     render(){
       return(

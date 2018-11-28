@@ -10,17 +10,11 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-// Import statements go here, this includes pictures or tile pics from a file
 
 import { WebBrowser } from 'expo';
-//import { MonoText } from '../components/StyledText';
 import settingIcon from '../assets/images/settingIcon.png';
 import boxIcon from '../assets/images/SupportBoxMainLogoTranUpdated.png';
 import groupPic from '../assets/images/hands.png'
-
-
-
-
 
 export default class JoinGroupScreen extends React.Component {
   static navigationOptions = {
@@ -37,7 +31,6 @@ export default class JoinGroupScreen extends React.Component {
         <Right />
       </Header>
     )
-    //headerTransparent: true
   };
 
   render() {
@@ -48,25 +41,6 @@ export default class JoinGroupScreen extends React.Component {
          Join a group
          </Text>
          </View>
-
-
-
-/*
-          <ScrollView style={styles.container}>
-                   <View style={styles.BoxIcon}>
-
-                       <Image
-                           style={styles.BoxIcon}
-                           source={require('../assets/images/SupportBoxMainLogoTranUpdated.png')}
-                       />
-
-                       <Text>
-                       Here are your Groups
-                       </Text>
-
-                   </View>
-           </ScrollView>
-           */
        );
    }
  }

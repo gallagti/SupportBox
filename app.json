@@ -5,9 +5,6 @@
     "slug": "SupportBox",
     "privacy": "public",
     "sdkVersion": "30.0.0",
-    "facebookScheme": "fb807211646276739",
-    "FacebookAppID":"807211646276739",
-    "facebookDisplayName": "SupportBox",
     "platforms": [
       "ios",
       "android"

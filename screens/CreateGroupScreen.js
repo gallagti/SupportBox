@@ -1,6 +1,5 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
-//import * as firebase from 'firebase';
 import { Container, Content, Header, Form, Input, Item, Button, Label, List, ListItem } from 'native-base'
 
 import {
@@ -15,20 +14,14 @@ import {
   View,
   Alert,
 } from 'react-native';
-// Import statements go here, this includes pictures or tile pics from a file
 
 import { WebBrowser } from 'expo';
-//import { MonoText } from '../components/StyledText';
 import settingIcon from '../assets/images/settingIcon.png';
 import boxIcon from '../assets/images/SupportBoxMainLogoTranUpdated.png';
 import groupPic from '../assets/images/hands.png'
 import {StackNavigator} from "react-navigation";
 
-//import HomeScreen from "./HomeScreen.js";
-
-//import { addGroup } from '../services/addGroup';
 import Fire from "../config/newdb";
-
 
 export default class MyGroupsScreen extends React.Component {
 
@@ -36,7 +29,6 @@ export default class MyGroupsScreen extends React.Component {
       super(props);
       this.state = {
         name: 'null',
-        //error: false
       }
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
@@ -48,7 +40,6 @@ export default class MyGroupsScreen extends React.Component {
       });
     }
     handleSubmit() {
-      //console.log(this.state.name)
       Fire.shared.addGroup(this.state.name);
       Alert.alert(
         'new group created'
@@ -79,8 +70,6 @@ export default class MyGroupsScreen extends React.Component {
       </View>
 
       </ScrollView>
-
-
     )
   }
 };

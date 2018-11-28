@@ -11,18 +11,11 @@ import {
   TextInput,
   View,
 } from 'react-native';
-// Import statements go here, this includes pictures or tile pics from a file
 
 import { WebBrowser } from 'expo';
 import { MonoText } from '../components/StyledText';
 import boxIcon from '../assets/images/SupportBoxMainLogoTranUpdated.png';
-
-//import LoginScreen from "./LoginScreen.js";
 import GroupBaseScreen from "./GroupBaseScreen.js";
-//import {db} from '../config/db';
-//import { db } from '../config/db.js';
-//import * as firebase from 'firebase';
-
 
 export default class HomeScreen extends React.Component {
 
@@ -33,43 +26,15 @@ export default class HomeScreen extends React.Component {
     })
   }
 
-
-
-/*
-  async loginWithFacebook() {
-    const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync(
-      '807211646276739',
-      { permissions: ['public_profile'] }
-    );
-
-    if (type === 'success') {
-      // Build Firebase credential with the Facebook access token.
-      const credential = firebase.auth.FacebookAuthProvider.credential(token);
-
-      // Sign in with credential from the Facebook user.
-      firebase.auth().signInWithCredential(credential).catch((error) => {
-        console.error("Loading user failed with error: " , error.message);
-        //can handle other error codes here if wanted
-        //see https://firebase.google.com/docs/reference/js/firebase.auth.Auth#signInWithCredential
-      });
-    }
-  }
-*/
   static navigationOptions = {
     headerTransparent: true
   };
 
-/*
-  onPress = () =>
-      this.props.navigation.navigate('GroupBaseScreen', { name: this.state.name });
-*/
 onPress = () =>
     this.props.navigation.navigate('GroupBaseScreen');
-  //onChangeText = name => this.setState({ name });
 
   render() {
     return (
-    //  <View style={styles.container}>
     <ScrollView style={styles.container}>
         <View style={styles.BoxIcon}>
             <Image
@@ -104,15 +69,6 @@ onPress = () =>
     );
   };
 
-/*
-  _onLoadUserCompleted(user){
-
-  }
-
-  _onLogout(){
-    this.props.navigation
-  }
-*/
 const offset = 24;
 const styles = StyleSheet.create({
   container: {

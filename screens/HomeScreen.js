@@ -9,6 +9,8 @@ import {
   TouchableOpacity,
   Alert,
   TextInput,
+  AsyncStorage,
+  TouchableHighlight,
   View,
 } from 'react-native';
 
@@ -23,8 +25,11 @@ export default class HomeScreen extends React.Component {
   constructor(props){
     super(props)
     this.state = ({
-      box_num: null,
+      box_num: 100,
     })
+
+  this.handleChange = this.handleChange.bind(this);
+  this.store_box_key = this.store_box_key.bind(this);
   }
 
   static navigationOptions = {
@@ -32,13 +37,24 @@ export default class HomeScreen extends React.Component {
   };
 
 onPress = () =>
-    this.props.navigation.navigate('MyGroupsScreen');
+    this.props.navigation.navigate('GroupBaseScreen');
 
 onPressRegister = () =>
-    this.props.navigations.navigate('BoxRegisterScreen', {box_number: this.state.box_number});
+    this.props.navigation.navigate('BoxRegisterScreen');
 
-onChangeText = box_number => this.setState({ box_number });
+handleChange(e) {
+     this.setState({
+       box_num: e.nativeEvent.text
+     });
+   }
 
+async store_box_key() {
+  await AsyncStorage.setItem('box_key', this.state.box_num);
+  const value = await AsyncStorage.getItem('box_key');
+  if(value === null){
+    alert('box_key is null');
+  }
+}
 
   render() {
     return (
@@ -49,6 +65,7 @@ onChangeText = box_number => this.setState({ box_number });
                 source={require('../assets/images/SupportBoxMainLogoTranUpdated.png')}
             />
         </View>
+
         <View>
           <Content>
       <Button
@@ -58,28 +75,45 @@ onChangeText = box_number => this.setState({ box_number });
         <Text>Continue Anonymously</Text>
       </Button>
 
+
+      <View style={styles.main}>
+
+      <Text style={styles.title}>
+      Register Your SupportBox
+      </Text>
+
       <TextInput
-        style={styles.nameInput}
-        placeHolder="Enter Your Box Number"
-        onChangeText={this.onChangeText}
-        value={this.state.box_num}
-        />
+        style={styles.itemInput}
+        placeholder="Enter Your SupportBox Number"
+        onChange={this.handleChange}
+      />
         <Button
-        block style = {styles.MyGroupsButton}
-        onPress={this.onPress}
+          block style={styles.JoinAGroupButton}
+          onPress={() => {
+            try{
+              this.store_box_key()
+            }
+            catch(error){
+              alert('could not store box key')
+            }
+            finally{
+              this.props.navigation.navigate('BoxRegisterScreen')
+            }
+          }
+        }
         >
-          <Text>Register Your Box</Text>
+          <Text >
+            Register
+          </Text>
         </Button>
 
-/*
-      <TouchableOpacity onPress={this.onPress}>
-        <Text style={styles.buttonText}>Next</Text>
-      </TouchableOpacity>
-      */
+        </View>
           </Content>
         </View>
   </ScrollView>
-)}};
+);
+}
+}
 
   _handleLearnMorePress = () => {
     WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/guides/development-mode');
@@ -97,10 +131,27 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#57caff',
   },
+  itemInput: {
+         height: 50,
+         padding: 4,
+         marginRight: 5,
+         fontSize: 23,
+         borderWidth: 1,
+         borderColor: 'white',
+         borderRadius: 8,
+         color: 'white'
+       },
   MyGroupsButton: {
     marginTop: 50,
     marginBottom: 15,
     height: 70,
+  },
+  MyInputButton: {
+    textAlign: 'center',
+    marginTop: 15,
+    marginBottom: 15,
+    height: 20,
+    color: 'white'
   },
   developmentModeText: {
     marginBottom: 20,

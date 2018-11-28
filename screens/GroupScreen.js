@@ -40,7 +40,6 @@ export default class MyGroupsScreen extends React.Component<Props> {
       isLoadingEarlier: false,
     }
 
-  //  this.pressRow = this.pressRow.bind(this);
     this.renderRow = this.renderRow.bind(this);
   }
 

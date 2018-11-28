@@ -35,7 +35,8 @@ export default class BoxRegisterScreen extends React.Component {
       groups: [],
       dataSource: ds,
       group: "",
-      currentUser: ""
+      currentUser: "",
+      box_num: null
     }
 
     this.renderRow = this.renderRow.bind(this);
@@ -57,7 +58,11 @@ export default class BoxRegisterScreen extends React.Component {
     )
   });
 
-  componentWillMount(){
+  async componentWillMount(){
+    var AsyncVal = await AsyncStorage.getItem('box_key');
+    await this.setState({
+      box_num: AsyncVal
+    })
     this.getGroups(Fire.shared.groupsref)
   }
 
@@ -81,29 +86,19 @@ export default class BoxRegisterScreen extends React.Component {
     });
   }
 
-    store_group_key = async groupKey => {
-      await AsyncStorage.setItem('group_key', groupKey);
-      const value = await AsyncStorage.getItem('group_key');
-      if(value === null){
-        alert('value is null');
-      }
-    }
-
     renderRow(group){
       return(
         <Button
         block style = {styles.JoinAGroupButton}
         onPress={() => {
           try{
-            //this.store_group_key(group._key)
-            //update box_number's group_key to match group._key
-
+            Fire.shared.box_groupid_update(group._key)
           }
           catch(error){
-            alert('error retrieving the group messages, please contact the developers')
+            alert('error Registering your box, please contact the developers')
           }
           finally{
-            alert('Box ' + this.props.navigation.state.params.box_number
+            alert('Box ' + this.state.box_num
               +' successfully registered to ' + group.name)
             this.props.navigation.goBack()
           }
@@ -119,7 +114,6 @@ export default class BoxRegisterScreen extends React.Component {
     render(){
       return(
         <ScrollView style={styles.container}>
-
         <View>
         <Content>
           <ListView

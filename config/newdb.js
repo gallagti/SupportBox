@@ -47,15 +47,10 @@ class Fire {
     return firebase.database().ref('\Groups');
   }
 
-/*
-  get groupmessage(groupKey){
-    return firebase.database().ref('\Messages').orderByKey().equalTo(groupKey);
-  }
-  */
-
-  box_groupid_ref = box_id =>{
-    firebase.database().ref('\Box').orderByKey().equalTo(box_id).child('\group_id').update({
-
+  box_groupid_update = async groupKey => {
+    var boxId = await AsyncStorage.getItem('box_key');
+    firebase.database().ref('\Box').child(boxId).update({
+      group_key: groupKey
     })
   }
 
@@ -70,22 +65,6 @@ class Fire {
   get rootdatabase(){
     return firebase;
   }
-
-
-  get_group_key = async() => {
-    try {
-      const value = await AsyncStorage.getItem('group_key');
-      if(value !== null){
-        //return value;
-          alert('value from groupScreen = ' + value);
-      }
-      else alert('value is null');
-    }
-    catch (error){
-      alert('error retrieving the group messages, please contact the developers')
-    }
-  }
-
 
   parse = snapshot => {
     const { timestamp: numberStamp, text, user } = snapshot.val();
@@ -107,27 +86,11 @@ class Fire {
 
 
   on = async callback => {
-    //groupMessageRef
     var group_key = await AsyncStorage.getItem('group_key');
     this.messagesref.child(group_key)
       .limitToLast(20)
       .on('child_added', snapshot => callback(this.parse(snapshot)));
 }
-/*
-async on(callback){
-  try{
-    var group_key = await AsyncStorage.getItem('group_key');
-  }
-  catch (error){
-    alert('error retrieving the group messages, please contact the developers')
-  }
-  finally{
-    this.messagesref.child(group_key)
-      .limitToLast(20)
-      .on('child_added', snapshot => callback(this.parse(snapshot)));
-  }
-}
-*/
 
   get timestamp() {
     return firebase.database.ServerValue.TIMESTAMP;
@@ -152,11 +115,6 @@ async on(callback){
   // close the connection to the Backend
   off = group_key => {
     this.messagesref.child(group_key).off();
-  }
-
-  register_box = async => {
-    var group_key = await AsyncStorage.getItem('group_key');
-
   }
 
 }

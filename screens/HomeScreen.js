@@ -1,93 +1,119 @@
 import React from 'react';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { Container, Header, Content, Button, Text } from 'native-base';
 import {
   Image,
   Platform,
-  ScrollView,
   StyleSheet,
-  Text,
+  ScrollView,
   TouchableOpacity,
+  Alert,
+  TextInput,
+  AsyncStorage,
+  TouchableHighlight,
   View,
 } from 'react-native';
-// Import statements go here, this includes pictures or tile pics from a file
 
 import { WebBrowser } from 'expo';
 import { MonoText } from '../components/StyledText';
-
+import boxIcon from '../assets/images/SupportBoxMainLogoTranUpdated.png';
+import GroupBaseScreen from "./GroupBaseScreen.js";
+import BoxRegisterScreen from "./BoxRegisterScreen.js";
 
 export default class HomeScreen extends React.Component {
+
+  constructor(props){
+    super(props)
+    this.state = ({
+      box_num: 100,
+    })
+
+  this.handleChange = this.handleChange.bind(this);
+  this.store_box_key = this.store_box_key.bind(this);
+  }
+
   static navigationOptions = {
     headerTransparent: true
   };
 
+onPress = () =>
+    this.props.navigation.navigate('GroupBaseScreen');
+
+onPressRegister = () =>
+    this.props.navigation.navigate('BoxRegisterScreen');
+
+handleChange(e) {
+     this.setState({
+       box_num: e.nativeEvent.text
+     });
+   }
+
+async store_box_key() {
+  await AsyncStorage.setItem('box_key', this.state.box_num);
+  const value = await AsyncStorage.getItem('box_key');
+  if(value === null){
+    alert('box_key is null');
+  }
+}
+
   render() {
     return (
-      <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-          <View style={styles.welcomeContainer}>
+    <ScrollView style={styles.container}>
+        <View style={styles.BoxIcon}>
             <Image
-              source={
-                __DEV__
-                  ? require('../assets/images/robot-dev.png')
-                  : require('../assets/images/robot-prod.png')
-              }
-              style={styles.welcomeImage}
+                style={styles.BoxIcon}
+                source={require('../assets/images/SupportBoxMainLogoTranUpdated.png')}
             />
-          </View>
-
-          <View style={styles.getStartedContainer}>
-            {this._maybeRenderDevelopmentModeWarning()}
-
-            <Text style={styles.getStartedText}>Get started by opening</Text>
-
-            <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-              <MonoText style={styles.codeHighlightText}>screens/HomeScreen.js</MonoText>
-            </View>
-
-            <Text style={styles.getStartedText}>
-
-            </Text>
-          </View>
-
-          <View style={styles.helpContainer}>
-            <TouchableOpacity onPress={this._handleHelpPress} style={styles.helpLink}>
-              <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
-            </TouchableOpacity>
-          </View>
-        </ScrollView>
-        // new styile, which is the info bar at the bottom I believe
-        <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
-
-          <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-            <MonoText style={styles.codeHighlightText}>navigation/MainTabNavigator.js</MonoText>
-          </View>
         </View>
-      </View>
-    );
-  }
 
-  _maybeRenderDevelopmentModeWarning() {
-    if (__DEV__) {
-      const learnMoreButton = (
-        <Text onPress={this._handleLearnMorePress} style={styles.helpLinkText}>
-          Learn more
-        </Text>
-      );
+        <View>
+          <Content>
+      <Button
+      block style = {styles.MyGroupsButton}
+      onPress={this.onPress}
+      >
+        <Text>Continue Anonymously</Text>
+      </Button>
 
-      return (
-        <Text style={styles.developmentModeText}>
-          Development mode is enabled, your app will be slower but you can use useful development
-          tools. {learnMoreButton}
-        </Text>
-      );
-    } else {
-      return (
-        <Text style={styles.developmentModeText}>
-          You are not in development mode, your app will run at full speed.
-        </Text>
-      );
-    }
-  }
+
+      <View style={styles.main}>
+
+      <Text style={styles.title}>
+      Register Your SupportBox
+      </Text>
+
+      <TextInput
+        style={styles.itemInput}
+        placeholder="Enter Your SupportBox Number"
+        onChange={this.handleChange}
+      />
+        <Button
+          block style={styles.JoinAGroupButton}
+          onPress={() => {
+            try{
+              this.store_box_key()
+            }
+            catch(error){
+              alert('could not store box key')
+            }
+            finally{
+              this.props.navigation.navigate('BoxRegisterScreen')
+            }
+          }
+        }
+        >
+          <Text >
+            Register
+          </Text>
+        </Button>
+
+        </View>
+          </Content>
+        </View>
+  </ScrollView>
+);
+}
+}
 
   _handleLearnMorePress = () => {
     WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/guides/development-mode');
@@ -98,12 +124,34 @@ export default class HomeScreen extends React.Component {
       'https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes'
     );
   };
-}
 
+const offset = 24;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#57caff',
+  },
+  itemInput: {
+         height: 50,
+         padding: 4,
+         marginRight: 5,
+         fontSize: 23,
+         borderWidth: 1,
+         borderColor: 'white',
+         borderRadius: 8,
+         color: 'white'
+       },
+  MyGroupsButton: {
+    marginTop: 50,
+    marginBottom: 15,
+    height: 70,
+  },
+  MyInputButton: {
+    textAlign: 'center',
+    marginTop: 15,
+    marginBottom: 15,
+    height: 20,
+    color: 'white'
   },
   developmentModeText: {
     marginBottom: 20,
@@ -126,6 +174,14 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     marginTop: 3,
     marginLeft: -10,
+  },
+  BoxIcon: {
+    resizeMode: 'contain',
+    width: 200,
+    height: 200,
+    marginTop: 20,
+    marginBottom: 20,
+    alignSelf: 'center',
   },
   getStartedContainer: {
     alignItems: 'center',
@@ -182,6 +238,23 @@ const styles = StyleSheet.create({
   },
   helpLink: {
     paddingVertical: 15,
+  },
+  title: {
+    marginTop: offset,
+    marginLeft: offset,
+    fontSize: offset,
+  },
+  nameInput: {
+    height: offset * 2,
+
+    margin: offset,
+    paddingHorizontal: offset,
+    borderColor: '#111111',
+    borderWidth: 1,
+  },
+  buttonText: {
+    marginLeft: offset,
+    fontSize: offset,
   },
   helpLinkText: {
     fontSize: 14,

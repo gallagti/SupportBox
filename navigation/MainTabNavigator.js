@@ -4,19 +4,27 @@ import {
 } from 'react-native';
 import {
   createStackNavigator,
-  createBottomTabNavigator
+  createBottomTabNavigator,
+  lazy
 } from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import GroupScreen from '../screens/GroupScreen';
-import LinksScreen from '../screens/LinksScreen';
+import GroupBaseScreen from '../screens/GroupBaseScreen';
+import MyGroupsScreen from '../screens/MyGroupsScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import JoinGroupScreen from '../screens/JoinGroupScreen';
+import SearchGroupScreen from '../screens/SearchGroupScreen';
+import CreateGroupScreen from "../screens/CreateGroupScreen";
+import GroupScreen from "../screens/GroupScreen";
+import BoxRegisterScreen from "../screens/BoxRegisterScreen";
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
+  GroupBaseScreen: GroupBaseScreen,
+  BoxRegisterScreen: BoxRegisterScreen,
 });
-
+//is a test
 HomeStack.navigationOptions = {
   tabBarLabel: 'Home',
   tabBarIcon: ({
@@ -35,7 +43,12 @@ HomeStack.navigationOptions = {
 };
 
 const GroupStack = createStackNavigator({
-  Groups: GroupScreen,
+  Groups: GroupBaseScreen,
+  MyGroupsScreen: MyGroupsScreen,
+  JoinGroupScreen: JoinGroupScreen,
+  SearchGroupScreen: SearchGroupScreen,
+  CreateGroupScreen: CreateGroupScreen,
+  GroupScreen: GroupScreen,
 });
 
 GroupStack.navigationOptions = {
@@ -50,25 +63,6 @@ GroupStack.navigationOptions = {
       Platform.OS === 'ios' ?
       `ios-information-circle${focused ? '' : '-outline'}` :
         'md-information-circle'
-    }
-    />
-  ),
-};
-
-const LinksStack = createStackNavigator({
-  Links: LinksScreen,
-});
-
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
-  tabBarIcon: ({
-    focused
-  }) => ( <
-    TabBarIcon focused = {
-      focused
-    }
-    name = {
-      Platform.OS === 'ios' ? `ios-link${focused ? '' : '-outline'}` : 'md-link'
     }
     />
   ),
@@ -96,6 +90,5 @@ SettingsStack.navigationOptions = {
 export default createBottomTabNavigator({
   HomeStack,
   GroupStack,
-  LinksStack,
   SettingsStack,
-});
+}, {lazy: true});

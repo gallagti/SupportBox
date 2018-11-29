@@ -51,7 +51,7 @@ export default class BoxRegisterScreen extends React.Component {
           </Button>
         </Left>
         <Body style={styles.headercenter}>
-          <Title>Register Your Box!</Title>
+          <Title>Tap Group To Register!</Title>
         </Body>
         <Right style={styles.headerright}/>
       </Header>
@@ -154,10 +154,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#57caff',
   },
   header: {
-    flex: 1,
+    flex: 0,
+    paddingLeft: 6,
+    width: 62
   },
   headercenter: {
-    flex: 2,
+    flex: 1,
   },
   headerright: {
     flex: 0,

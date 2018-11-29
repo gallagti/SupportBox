@@ -41,7 +41,7 @@ export default class GroupBaseScreen extends React.Component {
                        />
                    </View>
 
-                   <View style={styles.tabBarInfoContainer}>
+                   <View>
                      <Text style={styles.tabBarInfoText}>Welcome to SupportBox!</Text>
                    </View>
 

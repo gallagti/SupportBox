@@ -156,10 +156,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#57caff',
   },
   header: {
-    flex: 1,
+    flex: 0,
+    paddingLeft: 6,
+    width: 62
   },
   headercenter: {
-    flex: 2,
+    flex: 1,
   },
   headerright: {
     flex: 0,

@@ -25,7 +25,7 @@ export default class HomeScreen extends React.Component {
   constructor(props){
     super(props)
     this.state = ({
-      box_num: "987654321",
+      box_num: '',
     })
 
   this.handleChange = this.handleChange.bind(this);
@@ -49,18 +49,24 @@ handleChange(e) {
    }
 
 async store_box_key() {
-  if(this.state.box_num !== "987654321"){
+  if(this.state.box_num !== null){
       await AsyncStorage.setItem('box_key', this.state.box_num);
       const value = await AsyncStorage.getItem('box_key');
       if(value === null){
-        alert('box_key is null');
+      //  alert('value is ' + value);
+      }
+      if(this.state.box_num === null){
+        //alert('box_num is ' + value);
       }
   }
 }
 
   render() {
     return (
-    <ScrollView style={styles.container}>
+    <ScrollView
+    scrollEnabled={false}
+    style={styles.container}>
+
         <View style={styles.BoxIcon}>
             <Image
                 style={styles.BoxIcon}
@@ -99,7 +105,7 @@ async store_box_key() {
               alert('could not store box key')
             }
             finally{
-              if(this.state.box_num === "987654321"){
+              if(this.state.box_num === ''){
                 alert('You need to enter your SupportBox ID above')
               }
               else{

@@ -114,7 +114,7 @@ export default class BoxRegisterScreen extends React.Component {
     render(){
       return(
         <ScrollView style={styles.container}>
-        <View>
+        <View style={styles.anotherstyle}>
         <Content>
           <ListView
             dataSource={this.state.dataSource}
@@ -133,6 +133,9 @@ export default class BoxRegisterScreen extends React.Component {
 const styles = StyleSheet.create({
   listView: {
     flex: 1,
+  },
+  anotherstyle:{
+    marginTop: 15,
   },
   JoinAGroupButton: {
        marginBottom: 15,

@@ -136,6 +136,11 @@ const styles = StyleSheet.create({
   listView: {
     flex: 1,
   },
+  headerTitleStyle:{
+      flex:0.6,
+      textAlign: 'center',
+      alignSelf: 'center',
+},
   JoinAGroupButton: {
        marginBottom: 15,
        height: 70,
@@ -156,14 +161,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#57caff',
   },
   header: {
-    flex: 0,
-    paddingLeft: 6,
-    width: 62
-  },
-  headercenter: {
     flex: 1,
   },
+  headercenter: {
+    flex: 4,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   headerright: {
-    flex: 0,
+    flex: 1,
   }
   })

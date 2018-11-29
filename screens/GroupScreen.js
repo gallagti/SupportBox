@@ -115,6 +115,7 @@ export default class MyGroupsScreen extends React.Component<Props> {
 
     async componentDidMount() {
       var AsyncVal = await AsyncStorage.getItem('group_key');
+
       await this.setState({
         groupKey: AsyncVal,
       })
@@ -154,14 +155,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#57caff',
   },
   header: {
-    flex: 0,
-    paddingLeft: 6,
-    width: 62
-  },
-  headercenter: {
     flex: 1,
   },
+  headercenter: {
+    flex: 4,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   headerright: {
-    flex: 0,
+    flex: 1,
   }
   })

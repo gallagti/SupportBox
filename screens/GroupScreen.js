@@ -24,7 +24,9 @@ import {
   Title
 } from 'native-base';
 import GroupComponent from '../components/GroupComponent';
-import { GiftedChat, Actions, Bubble } from 'react-native-gifted-chat';
+import { GiftedChat, Actions, Bubble} from 'react-native-gifted-chat';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
+
 
 import Fire from "../config/newdb";
 
@@ -97,15 +99,19 @@ export default class MyGroupsScreen extends React.Component<Props> {
     }
 
     render(){
-      var groupMessageRef = this.get_group_key;
       return(
+        <View style={{flex:1}}>
         <GiftedChat
           messages = {this.state.messages}
           onSend={Fire.shared.send}
           user= {this.user}
           />
+          <KeyboardSpacer/>
+        </View>
+
       );
     }
+    //var groupMessageRef = this.get_group_key;
 
     async componentDidMount() {
       var AsyncVal = await AsyncStorage.getItem('group_key');

@@ -4,7 +4,7 @@ import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
 import {root} from "native-base";
 
-console.ignoredYellowBox = ['Warning:', 'Setting a timer', 'GiftedChat'];
+console.ignoredYellowBox = ['Warning:', 'Setting a timer', 'GiftedChat', 'Possible Unhandled'];
 
 export default class App extends React.Component {
   state = {

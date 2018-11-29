@@ -25,7 +25,7 @@ export default class HomeScreen extends React.Component {
   constructor(props){
     super(props)
     this.state = ({
-      box_num: 100,
+      box_num: "987654321",
     })
 
   this.handleChange = this.handleChange.bind(this);
@@ -37,7 +37,7 @@ export default class HomeScreen extends React.Component {
   };
 
 onPress = () =>
-    this.props.navigation.navigate('GroupBaseScreen');
+    this.props.navigation.navigate('GroupStack');
 
 onPressRegister = () =>
     this.props.navigation.navigate('BoxRegisterScreen');
@@ -49,10 +49,12 @@ handleChange(e) {
    }
 
 async store_box_key() {
-  await AsyncStorage.setItem('box_key', this.state.box_num);
-  const value = await AsyncStorage.getItem('box_key');
-  if(value === null){
-    alert('box_key is null');
+  if(this.state.box_num !== "987654321"){
+      await AsyncStorage.setItem('box_key', this.state.box_num);
+      const value = await AsyncStorage.getItem('box_key');
+      if(value === null){
+        alert('box_key is null');
+      }
   }
 }
 
@@ -97,7 +99,12 @@ async store_box_key() {
               alert('could not store box key')
             }
             finally{
-              this.props.navigation.navigate('BoxRegisterScreen')
+              if(this.state.box_num === "987654321"){
+                alert('You need to enter your SupportBox ID above')
+              }
+              else{
+                this.props.navigation.navigate('BoxRegisterScreen')
+              }
             }
           }
         }

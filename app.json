@@ -13,7 +13,7 @@
     "orientation": "portrait",
     "icon": "./assets/images/SupportBoxMainLogo2.png",
     "splash": {
-      "image": "./assets/images/SupportBoxMainLogo2.png",
+      "image": "./assets/images/SupportBoxMainLogoCorrectSquare.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

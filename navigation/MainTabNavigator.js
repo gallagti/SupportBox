@@ -21,7 +21,7 @@ import BoxRegisterScreen from "../screens/BoxRegisterScreen";
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
-  GroupBaseScreen: GroupBaseScreen,
+  //GroupBaseScreen: GroupBaseScreen,
   BoxRegisterScreen: BoxRegisterScreen,
 });
 //is a test

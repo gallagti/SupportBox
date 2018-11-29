@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import {StackNavigator} from "react-navigation";
 import GroupScreen from "./GroupScreen.js";
+import {
+  Platform
+} from 'react-native';
 
 import {
   View,
@@ -44,6 +47,7 @@ export default class BoxRegisterScreen extends React.Component {
 
   static navigationOptions = ({navigation}) => ({
     header: (
+      <View style={{paddingTop: Platform.OS === 'ios' ? 0 : Expo.Constants.statusBarHeight}}>
       <Header>
         <Left style={styles.header}>
           <Button transparent onPress={() => navigation.goBack()}>
@@ -55,6 +59,7 @@ export default class BoxRegisterScreen extends React.Component {
         </Body>
         <Right style={styles.headerright}/>
       </Header>
+      </View>
     )
   });
 

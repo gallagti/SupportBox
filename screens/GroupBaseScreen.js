@@ -28,7 +28,11 @@ export default class GroupBaseScreen extends React.Component {
   }
 
   static navigationOptions = {
-    headerTransparent: true
+    headerTransparent: true,
+    header: (
+      <View style={{paddingTop: Platform.OS === 'ios' ? 0 : Expo.Constants.statusBarHeight}}>
+      </View>
+    )
   };
 
   render() {

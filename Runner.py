@@ -14,11 +14,11 @@ GPIO.setup(DOOR_SENSOR_PIN, GPIO.IN, pull_up_down =  GPIO.PUD_UP)
 
 
 config = {
-  "apiKey": "AIzaSyDcEeWJw_U7T_Nm7uto-J5GCz9jHeEPJd0",
-  "authDomain": "supportbox-dd807.firebaseapp.com",
-  "databaseURL": "https://supportbox-dd807.firebaseio.com",
-  "projectId": "supportbox-dd807",
-  "storageBucket": "supportbox-dd807.appspot.com",
+  "apiKey": ,
+  "authDomain": ,
+  "databaseURL": ,
+  "projectId": ,
+  "storageBucket": ,
 }
 
 firebase = pyrebase.initialize_app(config)

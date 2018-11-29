@@ -88,6 +88,13 @@ export default class MyGroupsScreen extends React.Component {
         alert('value is null');
       }
     }
+    store_group_name = async groupName => {
+      await AsyncStorage.setItem('group_name', groupName);
+      const value = await AsyncStorage.getItem('group_name');
+      if(value === null){
+        alert('value is null');
+      }
+    }
 
     renderRow(group){
       return(
@@ -99,6 +106,12 @@ export default class MyGroupsScreen extends React.Component {
           }
           catch(error){
             alert('error retrieving the group messages, please contact the developers')
+          }
+          try{
+            this.store_group_name(group.name);
+          }
+          catch(error){
+            alert('error retrieving the group name, please contact the developers')
           }
           finally{
             this.props.navigation.navigate('GroupScreen')

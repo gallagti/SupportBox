@@ -33,6 +33,7 @@ import Fire from "../config/newdb";
 export default class MyGroupsScreen extends React.Component<Props> {
   constructor(props){
     super(props);
+
     let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       messages: [],
@@ -46,6 +47,7 @@ export default class MyGroupsScreen extends React.Component<Props> {
   }
 
   static navigationOptions = ({navigation}) => ({
+
     header: (
       <Header>
         <Left style={styles.header}>
@@ -54,7 +56,7 @@ export default class MyGroupsScreen extends React.Component<Props> {
           </Button>
         </Left>
         <Body style={styles.headercenter}>
-        <Title>Welcome </Title>
+        <Title>{navigation.getParam('groupName', 'No Name')} </Title>
         </Body>
         <Right style={styles.headerright}/>
       </Header>
@@ -115,15 +117,29 @@ export default class MyGroupsScreen extends React.Component<Props> {
 
     async componentDidMount() {
       var AsyncVal = await AsyncStorage.getItem('group_key');
+      var AsyncGroupName = await AsyncStorage.getItem('group_name');
+
 
       await this.setState({
         groupKey: AsyncVal,
       })
+
+      this.props.navigation.setParams({
+        groupName: AsyncGroupName
+      })
+
       Fire.shared.on(message =>
             this.setState(previousState => ({
               messages: GiftedChat.append(previousState.messages, message),
             }))
           );
+    }
+
+    async changeGroupName(){
+      var AsyncGroupName = await AsyncStorage.getItem('group_name');
+      await this.setState({
+        groupName: AsyncGroupName
+      })
     }
 
     componentWillUnmount(){
